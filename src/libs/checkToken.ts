@@ -1,3 +1,4 @@
+//ถ้าฝั่ง front end ต้องส่ง api ด้วย
 //if token is valid, return payload
 //otherwise, return null
 
@@ -14,7 +15,8 @@ export function checkToken() {
   const secret = process.env.JWT_SECRET || "This is another secret";
 
   try {
-    return jwt.verify(token, secret);
+    //return Payload {username, role, studentId}
+    return jwt.verify(token, secret); //This is payload
   } catch {
     return null;
   }

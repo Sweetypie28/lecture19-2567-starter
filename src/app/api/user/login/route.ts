@@ -5,7 +5,7 @@ import { Database } from "@lib/types";
 
 import jwt from "jsonwebtoken";
 
-
+//POST https://localhost:3000/api/user/login
 export const POST = async (request:NextRequest) => {
   const body = await request.json();
   const { username, password } = body;
@@ -16,7 +16,7 @@ export const POST = async (request:NextRequest) => {
     (user) => user.username === username && user.password === password
   );
 
-  if (!user) {
+  if (!user) { //หาข้อมูลคนที่ login ไม่เจอ
     return NextResponse.json(
       {
         ok: false,
@@ -30,12 +30,12 @@ export const POST = async (request:NextRequest) => {
 
   //if found user, sign a JWT TOKEN
   const token = jwt.sign(
-    { username, role: user.role, studentId: user.studentId },
-    secret,
+    { username, role: user.role, studentId: user.studentId }, //จพใส่ข้อมูลอะไรลงไปใน token บ้าง
+    secret, //string ที่เป็นความลับ ผู้สร้างมองเห็นเท่านั้น
     { expiresIn: "8h" }
   );
 
-  await sleep(1000);
+  await sleep(1000); //จำลองการทำงานเมื่อทำงานบนอินเตอร์เน็ต
 
-  return NextResponse.json({ ok: true, token, username });
+  return NextResponse.json({ ok: true, token, username }); //token จะส่งทั้ง token และ username กลับไป
 };

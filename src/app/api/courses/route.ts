@@ -3,6 +3,7 @@ import { Database } from "@lib/types";
 import { NextResponse } from "next/server";
 import sleep from "sleep-promise";
 
+//GET http://localhost:3000/api/courses
 export const GET = async () => {
   await sleep(1000);
   readDB();
